@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light" />
+<title>RESCODE PGX STORE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --border: #e7e3da;
+    --ink: #181613;
+    --ink-muted: #726d62;
+    --ink-faint: #a39d8f;
+    --accent: #6d28d9;
+    --accent-soft: #f1ebfc;
+    --live: #17974a;
+    --live-soft: #e9f7ee;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+  }
+
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 20px; }
+
+  /* ================= HEADER ================= */
+  header {
+    padding: 22px 0 0;
+  }
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand-mark {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    background: var(--ink);
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 6px;
+  }
+  .brand-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    letter-spacing: -0.01em;
+  }
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--live);
+    background: var(--live-soft);
+    padding: 6px 10px;
+    border-radius: 999px;
+  }
+  .live-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--live);
+    animation: pulse 1.8s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(23,151,74,0.45); }
+    70%  { box-shadow: 0 0 0 6px rgba(23,151,74,0); }
+    100% { box-shadow: 0 0 0 0 rgba(23,151,74,0); }
+  }
+
+  /* ================= HERO ================= */
+  .hero {
+    padding: 56px 0 44px;
+  }
+  .h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(30px, 7vw, 42px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+  .h1 .accent-word { color: var(--accent); }
+  .tagline {
+    margin-top: 16px;
+    max-width: 420px;
+    color: var(--ink-muted);
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    margin-top: 28px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary {
+    background: var(--ink);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-ghost {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--accent); }
+
+  /* ================= SECTION HEADS ================= */
+  .section { padding: 40px 0; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    margin-bottom: 14px;
+  }
+
+  /* ================= SERVICES ================= */
+  .services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .service-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 14px 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.15s ease;
+  }
+  .service-card.in { opacity: 1; transform: translateY(0); }
+  .service-card:hover { border-color: var(--accent); }
+  .service-code {
+    align-self: flex-start;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 3px 7px;
+    border-radius: 5px;
+  }
+  .service-name {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .service-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--live);
+  }
+  .service-status .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--live); }
+
+  /* ================= CONTACT ================= */
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 14px;
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s ease;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .contact-row.in { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease, background 0.15s ease; }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-row:hover { background: var(--accent-soft); }
+  .contact-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink-muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 4px 7px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .contact-text { flex: 1; min-width: 0; }
+  .contact-label { font-size: 10px; color: var(--ink-muted); }
+  .contact-value { font-size: 13px; font-weight: 600; }
+  .contact-arrow { color: var(--ink-faint); font-size: 14px; flex-shrink: 0; }
+
+  /* ================= FOOTER ================= */
+  footer {
+    padding: 30px 0 40px;
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 11px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-card, .contact-row { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .live-dot { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+    <header>
+      <div class="header-row">
+        <div class="brand">
+          <span class="brand-mark">PGX</span>
+          <span class="brand-name">RESCODE PGX STORE</span>
+        </div>
+        <span class="live-badge"><span class="live-dot"></span>AKTIF 24/7</span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1 class="h1">Satu gateway,<br /><span class="accent-word">semua kebutuhan digital.</span></h1>
+      <p class="tagline">
+        Nokos, PPOB, top up game, panel hosting, sampai builder APK — semua lewat satu pintu, satu sistem.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://t.me/ComunityApo" target="_blank" rel="noopener">Gabung Channel</a>
+        <a class="btn btn-ghost" href="https://wa.me/6285385110450" target="_blank" rel="noopener">Chat WhatsApp</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-label">// LAYANAN</div>
+      <div class="services">
+        <div class="service-card"><span class="service-code">NKS</span><span class="service-name">Nokos (No. OTP)</span><span class="service-status"><span class="dot"></span>AKTIF</span></div>
+        <div class="service-card"><span class="service-code">PPB</span><span class="service-name">PPOB</span><span class="service-status"><span class="dot"></span>AKTIF</span></div>
+        <div class="service-card"><span class="service-code">TPG</span><span class="service-name">Top Up Game</span><span class="service-status"><span class="dot"></span>AKTIF</span></div>
+        <div class="service-card"><span class="service-code">PNL</span><span class="service-name">Panel Hosting</span><span class="service-status"><span class="dot"></span>AKTIF</span></div>
+        <div class="service-card"><span class="service-code">APK</span><span class="service-name">Builder APK</span><span class="service-status"><span class="dot"></span>AKTIF</span></div>
+        <div class="service-card"><span class="service-code">PGX</span><span class="service-name">PG APIKEY</span><span class="service-status"><span class="dot"></span>AKTIF</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-label">// KONTAK</div>
+      <div class="contact-list">
+        <a class="contact-row" href="https://t.me/Restzy" target="_blank" rel="noopener">
+          <span class="contact-code">TG</span>
+          <span class="contact-text"><div class="contact-label">Telegram Owner</div><div class="contact-value">@Restzy</div></span>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a class="contact-row" href="https://t.me/ComunityApo" target="_blank" rel="noopener">
+          <span class="contact-code">CH</span>
+          <span class="contact-text"><div class="contact-label">Channel Telegram</div><div class="contact-value">t.me/ComunityApo</div></span>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a class="contact-row" href="https://wa.me/6285385110450" target="_blank" rel="noopener">
+          <span class="contact-code">WA</span>
+          <span class="contact-text"><div class="contact-label">WhatsApp</div><div class="contact-value">+62 853-8511-0450</div></span>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a class="contact-row" href="https://whatsapp.com/channel/0029Vb7rY7VGOj9olgOtvU1G" target="_blank" rel="noopener">
+          <span class="contact-code">CH</span>
+          <span class="contact-text"><div class="contact-label">Channel WhatsApp</div><div class="contact-value">Ikuti Channel</div></span>
+          <span class="contact-arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <footer>© RESCODE PGX STORE — API Gateway aktif 24/7</footer>
+  </div>
+
+<script>
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const targets = document.querySelectorAll(".service-card, .contact-row");
+  if (!reduceMotion) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add("in"), i * 40);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    targets.forEach((t) => io.observe(t));
+  } else {
+    targets.forEach((t) => t.classList.add("in"));
+  }
+</script>
+</body>
+</html>
