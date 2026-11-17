@@ -2,15 +2,15 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "http://kurumi-elainapanel.xtxintax.my.id:2811/api/$1"
+      "destination": "http://panelgitulah.r-cloud.my.id:25567/api/$1"
     },
     {
       "source": "/uploads/(.*)",
-      "destination": "http://kurumi-elainapanel.xtxintax.my.id:2811/uploads/$1"
+      "destination": "http://panelgitulah.r-cloud.my.id:25567/uploads/$1"
     },
     {
       "source": "/webhook/(.*)",
-      "destination": "http://kurumi-elainapanel.xtxintax.my.id:2811/webhook/$1"
+      "destination": "http://panelgitulah.r-cloud.my.id:25567/webhook/$1"
     }
   ]
 }
